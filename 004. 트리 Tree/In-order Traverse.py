@@ -12,15 +12,16 @@ class Node:
 def traverse_inorder(node):
     """in-order 순회 함수"""
 
-    if node.left_child is None:
-        print(node.data)
-        if node.right_child is not None:
-            traverse_inorder(node.right_child)
-        else:
-            print(node.data)
-
-    else:
+    if node.left_child is not None:
         traverse_inorder(node.left_child)
+        # 노드의 왼쪽 자식이 비어있지 않다면, 왼쪽 자식을 파라미터로 재귀함수를 사용
+    print(node.data)
+        # 노드의 왼쪽 자식이 없다면 노드 데이터를 출력
+    if node.right_child is not None:
+        traverse_inorder(node.right_child)
+        # 노드의 오른쪽 자식이 비어있지 않다면, 오른쪽 자식을 파라미터로 재귀함수를 사용
+        
+        #print문의 위치에 따라 전, 중, 후위 순회 구현가능
 
 
 # 여러 노드 인스턴스 생성
