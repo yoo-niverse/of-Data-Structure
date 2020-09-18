@@ -14,32 +14,22 @@ def heapify(tree, index, tree_size):
     left_child_index = 2 * index
     right_child_index = 2 * index + 1
 
-    if not 0 < left_child_index + right_child_index < tree_size * 2:
-        return None
-            # 재귀호출로 처리되는 왼쪽 자식노드와 오른쪽 자식노드 인덱스의 합이 범위를 벗어나면 실행 중단
+    largest = index  # 일단 부모 노드의 값이 가장 크다고 설정
 
-    max_node = max(tree[index], tree[left_child_index], tree[right_child_index])
-        # 파라미터로 받은 노드와 해당 노드의 자식 노드들 중 최대값을 저장
+    # 왼쪽 자식 노드의 값과 비교
+    if 0 < left_child_index < tree_size and tree[largest] < tree[left_child_index]:
+        largest = left_child_index
 
-    if max_node != tree[index]:
-        # 파라미터로 받은 노드의 값이 최대값이 아닐 경우
+    # 오른쪽 자식 노드의 값과 비교
+    if 0 < right_child_index < tree_size and tree[largest] < tree[right_child_index]:
+        largest = right_child_index
 
-        if tree[left_child_index] > tree[right_child_index]:
-            # 왼쪽 자식 노드의 값이 오른쪽보다 크다면
-            swap(tree, index, left_child_index)
-            heapify(tree, left_child_index, tree_size)
-                # 파라미터로 받은 노드(부모)와 왼쪽 노드의 data를 swap하고, 재배치 후 힙 속성을 만족하는지 재귀함수로 확인
-
-        else:
-            swap(tree, index, right_child_index)
-            heapify(tree, right_child_index, tree_size)
+    if largest != index: # 부모 노드의 값이 자식 노드의 값보다 작으면
+        swap(tree, index, largest)  # 부모 노드와 최댓값을 가진 자식 노드의 위치를 바꿔준다
+        heapify(tree, largest, tree_size)  # 자리가 바뀌어 자식 노드가 된 기존의 부모 노드를대상으로 또 heapify 함수를 호출한다
 
 
-# 인덱스 넘치는 문제 어떻게 해결할래?
-
-
-
-# 실행 코드
+'''# 실행 코드
 tree = [None, 15, 5, 12, 14, 9, 10, 6, 2, 11, 1]  # heapify하려고 하는 완전 이진 트리
 heapify(tree, 2, len(tree))  # 노드 2에 heapify 호출
-print(tree)
+print(tree)'''
