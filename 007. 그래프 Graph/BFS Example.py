@@ -13,18 +13,20 @@ def bfs(graph, start_node):
 
     start_node.visited = True
     queue.append(start_node)
+        # BFS 탐색 순서 1 : 먼저 파라미터로 전달받은 시작 노드에 방문을 표시하고, 큐에 추가한다.
 
     while queue:
         distin = queue.popleft()
-        for i in range(len(distin.adjacent_stations)-1):
-            tmp = distin.adjacent_stations[i]
+        # BFS 탐색 순서 2 : 큐에 요소가 있는 동안 반복하며 요소들을 하나씩 꺼낸다.
+
+        for i in distin.adjacent_stations:
+            # BFS 탐색 순서 3 : 꺼낸 노드들의 인접 리스트에 저장된 내용을 반복적으로 받아온다.
+            tmp = i
 
             if tmp.visited == False:
                 tmp.visited = True
                 queue.append(tmp)
-            else:
-                continue
-
+                # BFS 탐색 순서 4 : 가져온 인접 노드를 방문한 적이 없다면, 방문한 것으로 갱신하고 큐에 추가한다.
 
 stations = create_station_graph("./new_stations.txt")  # stations.txt 파일로 그래프를 만든다
 
